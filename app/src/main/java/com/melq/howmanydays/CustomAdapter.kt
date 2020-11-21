@@ -11,15 +11,9 @@ import java.time.temporal.ChronoUnit
 class CustomAdapter(private val dateList: ArrayList<DateData>): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        val name: TextView
-        val count: TextView
-        val date: TextView
-
-        init {
-            name = view.findViewById(R.id.date_name)
-            count = view.findViewById(R.id.date_count)
-            date = view.findViewById(R.id.date_date)
-        }
+        val name: TextView = view.findViewById(R.id.date_name)
+        val count: TextView = view.findViewById(R.id.date_count)
+        val date: TextView = view.findViewById(R.id.date_date)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
