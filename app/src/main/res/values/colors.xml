@@ -8,7 +8,8 @@
     <color name="black">#FF0A0A0A</color>
     <color name="white">#FFF0F0F0</color>
 
-    <color name="primary_dark_gray">#FF333333</color>
-    <color name="secondary_dark_gray">#FF222222</color>
+    <color name="light_dark_gray">#FF333333</color>
+    <color name="dark_gray">#FF222222</color>
+    <color name="very_light_gray">#FF777777</color>
     <color name="blue_clickable">#FF7EA8FC</color>
 </resources>
