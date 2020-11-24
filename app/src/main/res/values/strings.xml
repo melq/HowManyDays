@@ -4,9 +4,10 @@
     <!-- Strings used for fragments for navigation -->
     <string name="days">日</string>
     <string name="add_date">日付の追加</string>
-    <string name="date_name">日付の名前</string>
-    <string name="date">日付</string>
+    <string name="date_name">日付のタイトル</string>
     <string name="hint_input_name">この日に付ける名前を入力</string>
+    <string name="date">計測開始日</string>
+    <string name="empty_date">-/-/-</string>
     <string name="cancel">キャンセル</string>
     <string name="make">作成</string>
 </resources>
