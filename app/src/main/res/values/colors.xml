@@ -10,4 +10,5 @@
 
     <color name="primary_dark_gray">#FF333333</color>
     <color name="secondary_dark_gray">#FF222222</color>
+    <color name="blue_clickable">#FF7EA8FC</color>
 </resources>
