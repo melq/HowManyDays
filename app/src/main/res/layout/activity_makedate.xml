@@ -59,19 +59,17 @@
 
             <TextView
                 android:id="@+id/tv_cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/cancel"
-                android:textColor="@color/blue_clickable" />
+                style="@style/textButton"
+                android:background="@drawable/ripple_text_button"
+                android:text="@string/cancel"/>
 
             <TextView
                 android:id="@+id/tv_make"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/textButton"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
-                android:text="@string/make"
-                android:textColor="@color/blue_clickable" />
+                android:background="@drawable/ripple_text_button"
+                android:text="@string/make"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

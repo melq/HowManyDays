@@ -22,4 +22,12 @@
     <style name="Theme.HowManyDays.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.HowManyDays.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="textButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textColor">@color/blue_clickable</item>
+        <item name="android:clickable">true</item>
+    </style>
 </resources>
