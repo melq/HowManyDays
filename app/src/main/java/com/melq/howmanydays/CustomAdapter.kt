@@ -25,12 +25,11 @@ class CustomAdapter(private val dateList: ArrayList<DateData>): RecyclerView.Ada
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dateData = dateList[position]
 
-//        val count = try {
-//            ChronoUnit.DAYS.between(LocalDate.of(dateData.year, dateData.month, dateData.date), LocalDate.now()).toString()
-//        } catch (e: DateTimeException) {
-//            "N/A"
-//        }
-        val count = ChronoUnit.DAYS.between(LocalDate.of(dateData.year, dateData.month, dateData.date), LocalDate.now()).toString()
+        val count = try {
+            ChronoUnit.DAYS.between(LocalDate.of(dateData.year, dateData.month, dateData.date), LocalDate.now()).toString()
+        } catch (e: DateTimeException) {
+            "N/A"
+        }
         val date = dateData.year.toString() + "-" +
                 dateData.month.toString() + "-" +
                 dateData.date.toString()
