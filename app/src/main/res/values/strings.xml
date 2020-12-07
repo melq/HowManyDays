@@ -8,6 +8,7 @@
     <string name="hint_input_name">この日に付ける名前を入力</string>
     <string name="date">計測開始日</string>
     <string name="empty_date">-/-/-</string>
+    <string name="set_date">日付を指定</string>
     <string name="cancel">キャンセル</string>
     <string name="make">作成</string>
     <string name="delete_date">日付の削除</string>
