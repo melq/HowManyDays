@@ -10,4 +10,5 @@
     <string name="empty_date">-/-/-</string>
     <string name="cancel">キャンセル</string>
     <string name="make">作成</string>
+    <string name="delete_date">日付の削除</string>
 </resources>

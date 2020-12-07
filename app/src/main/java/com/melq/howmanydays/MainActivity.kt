@@ -9,12 +9,19 @@ import android.view.MenuItem
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import java.time.LocalDate
+import kotlinx.coroutines.Job
 
 class MainActivity : AppCompatActivity() {
+    private val job = Job()
+    companion object {
+        lateinit var database: AppDatabase
+        lateinit var dateDao: DateDao
+    }
+
     private val REQUESTCODE_MAKEDATE = 1
-    private val dateList = ArrayList<DateData>()
+    private var dateList = ArrayList<DateData>()
     private val adapter = CustomAdapter(dateList)
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -26,13 +33,11 @@ class MainActivity : AppCompatActivity() {
                 val month = data?.getIntExtra("MakeDate.Month", 1) ?: 1
                 val date = data?.getIntExtra("MakeDate.Date", 1) ?: 1
 
-                val dateData = DateData(dateList.size, name, LocalDate.of(year, month, date))
-
-                /*DBにdateDataを追加する*/
-
-                dateList.add(dateData)
+                val dateData = DateData(name, year, month, date)
+                dateDao.insert(dateData)
+                dateDao.updateList(dateList)
                 adapter.notifyDataSetChanged()
-                Log.d("Test", year.toString())
+                Log.d("ADDED", dateData.toString())
             }
         }
     }
@@ -42,15 +47,30 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        val fabAdd: FloatingActionButton = findViewById(R.id.fab_add)
+        /*データベースの設定*/
+        database = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-name").allowMainThreadQueries().build()
+        dateDao = database.dateDao()
+        dateDao.updateList(dateList)
+
+        /*---テスト用 データがないときのデータ追加*/
+        if (dateList.isEmpty()) {
+            for (i in 0 until 10) {
+                dateDao.insert(DateData("data$i", 2020, 11, i))
+                dateDao.updateList(dateList)
+            }
+        }
+        /*FloatActionButtonの設定*/
+        val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add)
         fabAdd.setOnClickListener {
             val intent = Intent(this, MakeDate::class.java)
             startActivityForResult(intent, REQUESTCODE_MAKEDATE)
         }
-
-        if (dateList.isEmpty())
-            for (i in 0 until 20)
-                dateList.add(DateData(i, "data$i", LocalDate.of(2020, 11, 1 + i)))
+//        val fabDelete = findViewById<FloatingActionButton>(R.id.fab_delete)
+//        fabDelete.setOnClickListener {
+//            dateDao.deleteAll()
+//            dateDao.updateList(dateList)
+//            adapter.notifyDataSetChanged()
+//        }
 
         val recyclerView = findViewById<RecyclerView>(R.id.date_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)

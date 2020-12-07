@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.time.DateTimeException
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 
@@ -24,11 +25,19 @@ class CustomAdapter(private val dateList: ArrayList<DateData>): RecyclerView.Ada
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val dateData = dateList[position]
 
-        val count = ChronoUnit.DAYS.between(dateData.date, LocalDate.now())
+//        val count = try {
+//            ChronoUnit.DAYS.between(LocalDate.of(dateData.year, dateData.month, dateData.date), LocalDate.now()).toString()
+//        } catch (e: DateTimeException) {
+//            "N/A"
+//        }
+        val count = ChronoUnit.DAYS.between(LocalDate.of(dateData.year, dateData.month, dateData.date), LocalDate.now()).toString()
+        val date = dateData.year.toString() + "-" +
+                dateData.month.toString() + "-" +
+                dateData.date.toString()
 
         holder.name.text = dateData.name
-        holder.count.text = count.toString()
-        holder.date.text = dateData.date.toString()
+        holder.count.text = count
+        holder.date.text = date
     }
 
     override fun getItemCount() = dateList.size
