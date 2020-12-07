@@ -75,15 +75,17 @@ class MainActivity : AppCompatActivity() {
         }
         val fabDelete = findViewById<FloatingActionButton>(R.id.fab_delete)
         fabDelete.setOnClickListener {
-            dialog.setTitle(R.string.delete_date)
-            dialog.setMessage(R.string.ask_delete)
-            dialog.setPositiveButton("OK") { _, _ ->
-                dateDao.deleteAll()
-                dateDao.updateList(dateList)
-                adapter.notifyDataSetChanged()
+            if (dateList.isNotEmpty()) {
+                dialog.setTitle(R.string.delete_date)
+                dialog.setMessage(R.string.ask_delete)
+                dialog.setPositiveButton("OK") { _, _ ->
+                    dateDao.deleteAll()
+                    dateDao.updateList(dateList)
+                    adapter.notifyDataSetChanged()
+                }
+                dialog.setNegativeButton("Cancel") { _, _ -> /*なにもしない*/ }
+                dialog.show()
             }
-            dialog.setNegativeButton("Cancel") { _, _ -> /*なにもしない*/ }
-            dialog.show()
         }
 
         val recyclerView = findViewById<RecyclerView>(R.id.date_recycler_view)
