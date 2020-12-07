@@ -33,7 +33,6 @@ class MakeDate : AppCompatActivity() {
         tvDate.text = dateText
 
         val today = LocalDate.now()
-        Log.v("TODAY", today.toString())
         val datePickerDialog = DatePickerDialog(this, { _, pYear, pMonth, pDate ->
             year = pYear
             month = pMonth + 1

@@ -1,5 +1,6 @@
 package com.melq.howmanydays
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,6 +29,7 @@ class CustomAdapter(private val dateList: ArrayList<DateData>): RecyclerView.Ada
         val count = try {
             ChronoUnit.DAYS.between(LocalDate.of(dateData.year, dateData.month, dateData.date), LocalDate.now()).toString()
         } catch (e: DateTimeException) {
+            Log.e("MELQ", "got exception", e)
             "N/A"
         }
         val date = dateData.year.toString() + "-" +

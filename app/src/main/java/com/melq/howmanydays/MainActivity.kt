@@ -3,7 +3,6 @@ package com.melq.howmanydays
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -22,11 +21,11 @@ class MainActivity : AppCompatActivity() {
         lateinit var dialog: AlertDialog.Builder
     }
 
-    private val REQUESTCODE_MAKEDATE = 1
+    private val requestCodeMakeDate = 1
     private var dateList = ArrayList<DateData>()
     private val adapter = CustomAdapter(dateList)
 
-
+    /*遷移先からデータを受け取るメソッド*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
@@ -40,7 +39,6 @@ class MainActivity : AppCompatActivity() {
                 dateDao.insert(dateData)
                 dateDao.updateList(dateList)
                 adapter.notifyDataSetChanged()
-                Log.d("ADDED", dateData.toString())
             }
         }
     }
@@ -68,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add)
         fabAdd.setOnClickListener {
             val intent = Intent(this, MakeDate::class.java)
-            startActivityForResult(intent, REQUESTCODE_MAKEDATE)
+            startActivityForResult(intent, requestCodeMakeDate)
         }
         val fabDelete = findViewById<FloatingActionButton>(R.id.fab_delete)
         fabDelete.setOnClickListener {
@@ -85,6 +83,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        /*RecyclerViewの設定*/
         val recyclerView = findViewById<RecyclerView>(R.id.date_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
