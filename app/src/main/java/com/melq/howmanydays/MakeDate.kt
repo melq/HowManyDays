@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import java.time.LocalDate
 
@@ -18,13 +19,14 @@ class MakeDate : AppCompatActivity() {
         var month: Int = 1
         var date: Int = 1
 
+        val dialog = AlertDialog.Builder(this)
         val etSetName = findViewById<EditText>(R.id.et_name)
         val tvSetDate = findViewById<TextView>(R.id.tv_set_date)
         val tvCancel = findViewById<TextView>(R.id.tv_cancel)
         val tvMake  = findViewById<TextView>(R.id.tv_make)
 
         tvSetDate.setOnClickListener {
-            
+
         }
         tvCancel.setOnClickListener {
             setResult(RESULT_CANCELED)
@@ -32,13 +34,20 @@ class MakeDate : AppCompatActivity() {
         }
         tvMake.setOnClickListener {
             name = etSetName.text.toString()
-            val intent = Intent()
-            intent.putExtra("MakeDate.DateName", name)
-            intent.putExtra("MakeDate.Year", year)
-            intent.putExtra("MakeDate.Month", month)
-            intent.putExtra("MakeDate.Date", date)
-            setResult(RESULT_OK, intent)
-            finish()
+            if (name == "") {
+                dialog.setTitle(R.string.no_name)
+                dialog.setPositiveButton("OK") { _, _ -> /*なにもしない*/ }
+                dialog.setMessage(R.string.put_name)
+                dialog.show()
+            } else {
+                val intent = Intent()
+                intent.putExtra("MakeDate.DateName", name)
+                intent.putExtra("MakeDate.Year", year)
+                intent.putExtra("MakeDate.Month", month)
+                intent.putExtra("MakeDate.Date", date)
+                setResult(RESULT_OK, intent)
+                finish()
+            }
         }
     }
 }

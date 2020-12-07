@@ -1,8 +1,6 @@
 package com.melq.howmanydays
 
 import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -25,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val REQUESTCODE_MAKEDATE = 1
-
     private var dateList = ArrayList<DateData>()
     private val adapter = CustomAdapter(dateList)
 
