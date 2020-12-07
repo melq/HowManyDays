@@ -11,4 +11,5 @@
     <string name="cancel">キャンセル</string>
     <string name="make">作成</string>
     <string name="delete_date">日付の削除</string>
+    <string name="ask_delete">日付のデータを削除しますか？</string>
 </resources>

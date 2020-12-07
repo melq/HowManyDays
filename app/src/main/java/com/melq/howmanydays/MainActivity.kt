@@ -1,5 +1,8 @@
 package com.melq.howmanydays
 
+import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -18,11 +21,14 @@ class MainActivity : AppCompatActivity() {
     companion object {
         lateinit var database: AppDatabase
         lateinit var dateDao: DateDao
+        lateinit var dialog: AlertDialog.Builder
     }
 
     private val REQUESTCODE_MAKEDATE = 1
+
     private var dateList = ArrayList<DateData>()
     private val adapter = CustomAdapter(dateList)
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -47,6 +53,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
+        dialog = AlertDialog.Builder(this)
+
         /*データベースの設定*/
         database = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-name").allowMainThreadQueries().build()
         dateDao = database.dateDao()
@@ -67,9 +75,15 @@ class MainActivity : AppCompatActivity() {
         }
         val fabDelete = findViewById<FloatingActionButton>(R.id.fab_delete)
         fabDelete.setOnClickListener {
-            dateDao.deleteAll()
-            dateDao.updateList(dateList)
-            adapter.notifyDataSetChanged()
+            dialog.setTitle(R.string.delete_date)
+            dialog.setMessage(R.string.ask_delete)
+            dialog.setPositiveButton("OK") { _, _ ->
+                dateDao.deleteAll()
+                dateDao.updateList(dateList)
+                adapter.notifyDataSetChanged()
+            }
+            dialog.setNegativeButton("Cancel") { _, _ -> /*なにもしない*/ }
+            dialog.show()
         }
 
         val recyclerView = findViewById<RecyclerView>(R.id.date_recycler_view)
