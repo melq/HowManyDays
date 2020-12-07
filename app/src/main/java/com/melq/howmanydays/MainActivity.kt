@@ -65,12 +65,12 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MakeDate::class.java)
             startActivityForResult(intent, REQUESTCODE_MAKEDATE)
         }
-//        val fabDelete = findViewById<FloatingActionButton>(R.id.fab_delete)
-//        fabDelete.setOnClickListener {
-//            dateDao.deleteAll()
-//            dateDao.updateList(dateList)
-//            adapter.notifyDataSetChanged()
-//        }
+        val fabDelete = findViewById<FloatingActionButton>(R.id.fab_delete)
+        fabDelete.setOnClickListener {
+            dateDao.deleteAll()
+            dateDao.updateList(dateList)
+            adapter.notifyDataSetChanged()
+        }
 
         val recyclerView = findViewById<RecyclerView>(R.id.date_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
