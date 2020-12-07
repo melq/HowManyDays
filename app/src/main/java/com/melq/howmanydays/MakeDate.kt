@@ -3,12 +3,10 @@ package com.melq.howmanydays
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import org.w3c.dom.Text
+import com.google.android.material.snackbar.Snackbar
 import java.time.LocalDate
 
 class MakeDate : AppCompatActivity() {
@@ -22,7 +20,6 @@ class MakeDate : AppCompatActivity() {
         var month: Int = 1
         var date: Int = 1
 
-        val dialog = AlertDialog.Builder(this)
         val etSetName = findViewById<EditText>(R.id.et_name)
         val tvDate = findViewById<TextView>(R.id.tv_date)
         val tvSetDate = findViewById<TextView>(R.id.tv_set_date)
@@ -52,10 +49,7 @@ class MakeDate : AppCompatActivity() {
         tvMake.setOnClickListener {
             name = etSetName.text.toString()
             if (name == "") {
-                dialog.setTitle(R.string.no_name)
-                dialog.setPositiveButton("OK") { _, _ -> /*なにもしない*/ }
-                dialog.setMessage(R.string.put_name)
-                dialog.show()
+                Snackbar.make(it, R.string.put_name, Snackbar.LENGTH_LONG).show()
             } else {
                 val intent = Intent()
                 intent.putExtra("MakeDate.DateName", name)
