@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
 
         /*---テスト用 データがないときのデータ追加*/
         if (dateList.isEmpty()) {
-            for (i in 0 until 10) {
+            for (i in 1 until 10) {
                 dateDao.insert(DateData("data$i", 2020, 11, i))
                 dateDao.updateList(dateList)
             }
