@@ -15,10 +15,11 @@ class MakeDate : AppCompatActivity() {
         setContentView(R.layout.activity_makedate)
         setSupportActionBar(findViewById(R.id.toolbar))
 
+        val today = LocalDate.now()
         var name: String
-        var year: Int = 2020
-        var month: Int = 1
-        var date: Int = 1
+        var year: Int = today.year
+        var month: Int = today.monthValue
+        var date: Int = today.dayOfMonth
 
         val etSetName = findViewById<EditText>(R.id.et_name)
         val tvDate = findViewById<TextView>(R.id.tv_date)
@@ -29,7 +30,6 @@ class MakeDate : AppCompatActivity() {
         var dateText = "$year/$month/$date"
         tvDate.text = dateText
 
-        val today = LocalDate.now()
         val datePickerDialog = DatePickerDialog(this, { _, pYear, pMonth, pDate ->
             year = pYear
             month = pMonth + 1
@@ -37,7 +37,7 @@ class MakeDate : AppCompatActivity() {
             dateText = "$year/$month/$date"
             tvDate.text = dateText
         },
-            today.year, today.monthValue - 1, today.dayOfMonth)
+            year, month - 1, date)
 
         tvSetDate.setOnClickListener {
             datePickerDialog.show()
