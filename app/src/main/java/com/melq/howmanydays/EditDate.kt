@@ -82,7 +82,7 @@ class EditDate : AppCompatActivity() {
             } else {
                 intent = Intent(this, MainActivity::class.java)
                 dateDao.update(DateData(dateId, name, year, month, date))
-                setResult(1, intent)
+                setResult(resultEdit, intent)
                 finish()
             }
         }

@@ -56,7 +56,7 @@ class MakeDate : AppCompatActivity() {
                 intent.putExtra("MakeDate.Year", year)
                 intent.putExtra("MakeDate.Month", month)
                 intent.putExtra("MakeDate.Date", date)
-                setResult(RESULT_OK, intent)
+                setResult(resultMake, intent)
                 finish()
             }
         }

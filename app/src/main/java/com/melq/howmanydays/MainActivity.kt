@@ -14,8 +14,11 @@ import androidx.room.Room
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.Job
 
+const val resultMake = 1
+const val resultEdit = 2
+
 class MainActivity : AppCompatActivity() {
-    private val job = Job()
+//    private val job = Job()
     companion object {
         lateinit var database: AppDatabase
         lateinit var dateDao: DateDao
@@ -31,7 +34,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
-            RESULT_OK -> {
+            resultMake -> {
                 val name = data?.getStringExtra("MakeDate.DateName") ?: "no data"
                 val year = data?.getIntExtra("MakeDate.Year", 1) ?: 1
                 val month = data?.getIntExtra("MakeDate.Month", 1) ?: 1
