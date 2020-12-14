@@ -25,7 +25,7 @@ interface DateDao {
     fun insert(dateData : DateData)
 
     @Update
-    fun update(dateData: DateData)
+    fun update(dateData : DateData)
 
     @Delete
     fun delete(dateData : DateData)
