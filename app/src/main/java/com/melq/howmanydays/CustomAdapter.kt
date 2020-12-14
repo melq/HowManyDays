@@ -1,5 +1,7 @@
 package com.melq.howmanydays
 
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +15,7 @@ import java.time.temporal.ChronoUnit
 class CustomAdapter(private val dateList: ArrayList<DateData>): RecyclerView.Adapter<CustomAdapter.ViewHolder>() {
 
     class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
+        val box: View = view.findViewById(R.id.layout_date_box)
         val name: TextView = view.findViewById(R.id.date_name)
         val count: TextView = view.findViewById(R.id.date_count)
         val date: TextView = view.findViewById(R.id.date_date)
@@ -39,6 +42,13 @@ class CustomAdapter(private val dateList: ArrayList<DateData>): RecyclerView.Ada
         holder.name.text = dateData.name
         holder.count.text = count
         holder.date.text = date
+
+        holder.box.setOnClickListener {
+            val context = it.context
+            val intent = Intent(context, MakeDate::class.java)
+            intent.putExtra("com.melq.howmanydays.mainactivity.id", dateData.id)
+            context.startActivity(intent)
+        }
     }
 
     override fun getItemCount() = dateList.size
