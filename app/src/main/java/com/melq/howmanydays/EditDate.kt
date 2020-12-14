@@ -2,6 +2,7 @@ package com.melq.howmanydays
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
@@ -23,7 +24,7 @@ class EditDate : AppCompatActivity() {
 
         dialog = AlertDialog.Builder(this)
 
-        val intent = intent
+        var intent = intent
         val dateId = intent.getIntExtra("com.melq.howmanydays.mainactivity.id", -1)
         if (dateId == -1)
             finish()
@@ -79,7 +80,9 @@ class EditDate : AppCompatActivity() {
             if (name == "") {
                 Snackbar.make(it, R.string.put_name, Snackbar.LENGTH_LONG).show()
             } else {
+                intent = Intent(this, MainActivity::class.java)
                 dateDao.update(DateData(dateId, name, year, month, date))
+                setResult(1, intent)
                 finish()
             }
         }

@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val requestCodeMakeDate = 1
+    private val requestCodeEditDate = 2
     private var dateList = ArrayList<DateData>()
     private val adapter = CustomAdapter(dateList)
 
@@ -37,10 +39,10 @@ class MainActivity : AppCompatActivity() {
 
                 val dateData = DateData(name, year, month, date)
                 dateDao.insert(dateData)
-                dateDao.updateList(dateList)
-                adapter.notifyDataSetChanged()
             }
         }
+        dateDao.updateList(dateList)
+        adapter.notifyDataSetChanged()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -90,6 +92,14 @@ class MainActivity : AppCompatActivity() {
         val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         getDrawable(R.drawable.divider)?.let { dividerItemDecoration.setDrawable(it) }
         recyclerView.addItemDecoration(dividerItemDecoration)
+
+        adapter.setOnItemClickListener(object: CustomAdapter.OnItemClickListener{
+            override fun onItemClickListener(view: View, position: Int, clickedId: Int) {
+                val intent = Intent(applicationContext, EditDate::class.java)
+                intent.putExtra("com.melq.howmanydays.mainactivity.id", clickedId)
+                startActivityForResult(intent, requestCodeEditDate)
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
