@@ -63,12 +63,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
         /*FloatActionButtonの設定*/
-        val fabAdd = findViewById<FloatingActionButton>(R.id.fab_add)
+        val fabAdd: FloatingActionButton = findViewById(R.id.fab_add)
         fabAdd.setOnClickListener {
             val intent = Intent(this, MakeDate::class.java)
             startActivityForResult(intent, requestCodeMakeDate)
         }
-        val fabDelete = findViewById<FloatingActionButton>(R.id.fab_delete)
+        val fabDelete: FloatingActionButton = findViewById(R.id.fab_delete)
         fabDelete.setOnClickListener {
             if (dateList.isNotEmpty()) {
                 dialog.setTitle(R.string.delete_date)
@@ -84,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         /*RecyclerViewの設定*/
-        val recyclerView = findViewById<RecyclerView>(R.id.date_recycler_view)
+        val recyclerView: RecyclerView = findViewById(R.id.date_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = adapter
         val dividerItemDecoration = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)

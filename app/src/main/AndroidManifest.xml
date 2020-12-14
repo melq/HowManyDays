@@ -22,6 +22,9 @@
         <activity
             android:name=".MakeDate"
             android:theme="@style/Theme.HowManyDays.NoActionBar"/>
+        <activity
+            android:name=".EditDate"
+            android:theme="@style/Theme.HowManyDays.NoActionBar"/>
     </application>
 
 </manifest>

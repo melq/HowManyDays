@@ -45,7 +45,7 @@ class CustomAdapter(private val dateList: ArrayList<DateData>): RecyclerView.Ada
 
         holder.box.setOnClickListener {
             val context = it.context
-            val intent = Intent(context, MakeDate::class.java)
+            val intent = Intent(context, EditDate::class.java)
             intent.putExtra("com.melq.howmanydays.mainactivity.id", dateData.id)
             context.startActivity(intent)
         }

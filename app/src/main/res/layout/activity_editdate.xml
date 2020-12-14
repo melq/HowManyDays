@@ -86,12 +86,19 @@
                 android:text="@string/cancel"/>
 
             <TextView
-                android:id="@+id/tv_make"
+                android:id="@+id/tv_delete"
+                style="@style/textButton"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/ripple_dark_gray"
+                android:text="@string/delete"/>
+
+            <TextView
+                android:id="@+id/tv_edit"
                 style="@style/textButton"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/ripple_dark_gray"
-                android:text="@string/make"/>
+                android:text="@string/edit"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

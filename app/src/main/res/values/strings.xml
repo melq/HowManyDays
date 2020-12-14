@@ -15,5 +15,6 @@
     <string name="ask_delete">日付のデータを削除しますか？</string>
     <string name="no_name">タイトル未入力</string>
     <string name="put_name">日付のタイトルを入力してください</string>
+    <string name="delete">削除</string>
     <string name="edit">更新</string>
 </resources>
