@@ -8,18 +8,20 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
-import java.time.LocalDate
 
 class EditDate : AppCompatActivity() {
     companion object {
         lateinit var database: AppDatabase
         lateinit var dateDao: DateDao
+        lateinit var dialog: AlertDialog.Builder
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_editdate)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+        dialog = AlertDialog.Builder(this)
 
         val intent = intent
         val dateId = intent.getIntExtra("com.melq.howmanydays.mainactivity.id", -1)
@@ -30,7 +32,6 @@ class EditDate : AppCompatActivity() {
         dateDao = database.dateDao()
         val dateData = dateDao.getDate(dateId)
 
-        val today = LocalDate.now()
         var name = dateData.name
         var year = dateData.year
         var month = dateData.month
@@ -64,8 +65,14 @@ class EditDate : AppCompatActivity() {
             finish()
         }
         tvDelete.setOnClickListener {
-            dateDao.delete(dateData)
-            finish()
+            dialog.setTitle(R.string.delete_date)
+            dialog.setMessage(R.string.ask_delete)
+            dialog.setPositiveButton("OK") { _, _ ->
+                dateDao.delete(dateData)
+                finish()
+            }
+            dialog.setNegativeButton("Cancel") { _, _ -> /*なにもしない*/ }
+            dialog.show()
         }
         tvMake.setOnClickListener {
             name = etSetName.text.toString()
