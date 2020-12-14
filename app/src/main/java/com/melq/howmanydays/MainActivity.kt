@@ -30,22 +30,22 @@ class MainActivity : AppCompatActivity() {
     private var dateList = ArrayList<DateData>()
     private val adapter = CustomAdapter(dateList)
 
+    /*DBに合わせて List と RecyclerView を更新するメソッド*/
+    private fun updateDateList() {
+        dateDao.updateList(dateList)
+        adapter.notifyDataSetChanged()
+    }
+
     /*遷移先からデータを受け取るメソッド*/
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
             resultMake -> {
-                val name = data?.getStringExtra("MakeDate.DateName") ?: "no data"
-                val year = data?.getIntExtra("MakeDate.Year", 1) ?: 1
-                val month = data?.getIntExtra("MakeDate.Month", 1) ?: 1
-                val date = data?.getIntExtra("MakeDate.Date", 1) ?: 1
-
-                val dateData = DateData(name, year, month, date)
-                dateDao.insert(dateData)
+            }
+            resultEdit -> {
             }
         }
-        dateDao.updateList(dateList)
-        adapter.notifyDataSetChanged()
+        updateDateList()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,8 +80,7 @@ class MainActivity : AppCompatActivity() {
                 dialog.setMessage(R.string.ask_delete)
                 dialog.setPositiveButton("OK") { _, _ ->
                     dateDao.deleteAll()
-                    dateDao.updateList(dateList)
-                    adapter.notifyDataSetChanged()
+                    updateDateList()
                 }
                 dialog.setNegativeButton("Cancel") { _, _ -> /*なにもしない*/ }
                 dialog.show()

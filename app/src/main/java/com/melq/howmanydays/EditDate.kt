@@ -2,7 +2,6 @@ package com.melq.howmanydays
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
@@ -63,6 +62,7 @@ class EditDate : AppCompatActivity() {
             datePickerDialog.show()
         }
         tvCancel.setOnClickListener {
+            setResult(RESULT_CANCELED)
             finish()
         }
         tvDelete.setOnClickListener {
@@ -80,9 +80,8 @@ class EditDate : AppCompatActivity() {
             if (name == "") {
                 Snackbar.make(it, R.string.put_name, Snackbar.LENGTH_LONG).show()
             } else {
-                intent = Intent(this, MainActivity::class.java)
                 dateDao.update(DateData(dateId, name, year, month, date))
-                setResult(resultEdit, intent)
+                setResult(resultEdit)
                 finish()
             }
         }

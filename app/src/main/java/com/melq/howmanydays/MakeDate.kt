@@ -1,19 +1,27 @@
 package com.melq.howmanydays
 
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
 import com.google.android.material.snackbar.Snackbar
 import java.time.LocalDate
 
 class MakeDate : AppCompatActivity() {
+    companion object {
+        lateinit var database: AppDatabase
+        lateinit var dateDao: DateDao
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_makedate)
         setSupportActionBar(findViewById(R.id.toolbar))
+
+        database = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-name").allowMainThreadQueries().build()
+        dateDao = database.dateDao()
 
         val today = LocalDate.now()
         var name: String
@@ -51,12 +59,8 @@ class MakeDate : AppCompatActivity() {
             if (name == "") {
                 Snackbar.make(it, R.string.put_name, Snackbar.LENGTH_LONG).show()
             } else {
-                val intent = Intent()
-                intent.putExtra("MakeDate.DateName", name)
-                intent.putExtra("MakeDate.Year", year)
-                intent.putExtra("MakeDate.Month", month)
-                intent.putExtra("MakeDate.Date", date)
-                setResult(resultMake, intent)
+                dateDao.insert(DateData(name, year, month, date))
+                setResult(resultMake)
                 finish()
             }
         }
