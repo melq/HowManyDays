@@ -95,8 +95,8 @@ class MainActivity : AppCompatActivity() {
         getDrawable(R.drawable.divider)?.let { dividerItemDecoration.setDrawable(it) }
         recyclerView.addItemDecoration(dividerItemDecoration)
 
-        adapter.setOnItemClickListener(object: CustomAdapter.OnItemClickListener{
-            override fun onItemClickListener(view: View, position: Int, clickedId: Int) {
+        adapter.setOnItemClickListener(object: CustomAdapter.OnItemClickListener {
+            override fun onItemClick(view: View, position: Int, clickedId: Int) {
                 val intent = Intent(applicationContext, EditDate::class.java)
                 intent.putExtra("com.melq.howmanydays.mainactivity.id", clickedId)
                 startActivityForResult(intent, requestCodeEditDate)

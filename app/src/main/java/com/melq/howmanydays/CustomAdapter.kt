@@ -43,14 +43,14 @@ class CustomAdapter(private val dateList: ArrayList<DateData>): RecyclerView.Ada
         holder.date.text = date
 
         holder.box.setOnClickListener {
-            listener.onItemClickListener(it, position, dateData.id)
+            listener.onItemClick(it, position, dateData.id)
         }
     }
 
     override fun getItemCount() = dateList.size
 
     interface OnItemClickListener {
-        fun onItemClickListener(view: View, position: Int, clickedId: Int)
+        fun onItemClick(view: View, position: Int, clickedId: Int)
     }
 
     fun setOnItemClickListener(listener: OnItemClickListener) {

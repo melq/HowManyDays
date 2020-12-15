@@ -23,7 +23,7 @@ class EditDate : AppCompatActivity() {
 
         dialog = AlertDialog.Builder(this)
 
-        var intent = intent
+        val intent = intent
         val dateId = intent.getIntExtra("com.melq.howmanydays.mainactivity.id", -1)
         if (dateId == -1)
             finish()
