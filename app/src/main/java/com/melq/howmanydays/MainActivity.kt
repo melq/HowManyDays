@@ -40,12 +40,10 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
-            resultMake -> {
-            }
-            resultEdit -> {
+            resultMake, resultEdit -> {
+                updateDateList()
             }
         }
-        updateDateList()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
