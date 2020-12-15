@@ -58,13 +58,6 @@ class MainActivity : AppCompatActivity() {
         dateDao = database.dateDao()
         dateDao.updateList(dateList)
 
-        /*---テスト用 データがないときのデータ追加*/
-        if (dateList.isEmpty()) {
-            for (i in 1 until 10) {
-                dateDao.insert(DateData("data$i", 2020, 11, i))
-                dateDao.updateList(dateList)
-            }
-        }
         /*FloatActionButtonの設定*/
         val fabAdd: FloatingActionButton = findViewById(R.id.fab_add)
         fabAdd.setOnClickListener {
@@ -100,17 +93,5 @@ class MainActivity : AppCompatActivity() {
                 startActivityForResult(intent, requestCodeEditDate)
             }
         })
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_settings -> true
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 }
