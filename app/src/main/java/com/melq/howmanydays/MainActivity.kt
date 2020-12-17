@@ -64,19 +64,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, MakeDate::class.java)
             startActivityForResult(intent, requestCodeMakeDate)
         }
-        val fabDelete: FloatingActionButton = findViewById(R.id.fab_delete)
-        fabDelete.setOnClickListener {
-            if (dateList.isNotEmpty()) {
-                dialog.setTitle(R.string.delete_date)
-                dialog.setMessage(R.string.ask_delete)
-                dialog.setPositiveButton("OK") { _, _ ->
-                    dateDao.deleteAll()
-                    updateDateList()
-                }
-                dialog.setNegativeButton("Cancel") { _, _ -> /*なにもしない*/ }
-                dialog.show()
-            }
-        }
 
         /*RecyclerViewの設定*/
         val recyclerView: RecyclerView = findViewById(R.id.date_recycler_view)
@@ -93,5 +80,29 @@ class MainActivity : AppCompatActivity() {
                 startActivityForResult(intent, requestCodeEditDate)
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_delete_all -> {
+                if (dateList.isNotEmpty()) {
+                    dialog.setTitle(R.string.delete_date)
+                    dialog.setMessage(R.string.ask_delete)
+                    dialog.setPositiveButton("OK") { _, _ ->
+                        dateDao.deleteAll()
+                        updateDateList()
+                    }
+                    dialog.setNegativeButton("Cancel") { _, _ -> /*なにもしない*/ }
+                    dialog.show()
+                }
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
