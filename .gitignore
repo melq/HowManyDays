@@ -21,3 +21,5 @@ gradle
 gradlew
 gradlew.bat
 settings.gradle
+/app/src/androidTest
+/app/src/test
