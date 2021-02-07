@@ -70,6 +70,7 @@ class EditDate : AppCompatActivity() {
             dialog.setMessage(R.string.ask_delete)
             dialog.setPositiveButton("OK") { _, _ ->
                 dateDao.delete(dateData)
+                setResult(RESULT_EDIT)
                 finish()
             }
             dialog.setNegativeButton("Cancel") { _, _ -> /*なにもしない*/ }
