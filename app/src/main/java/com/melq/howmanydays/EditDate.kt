@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
@@ -36,6 +37,7 @@ class EditDate : AppCompatActivity() {
         var year = dateData.year
         var month = dateData.month
         var date = dateData.date
+        var unit = dateData.displayMode
 
         val etSetName: EditText = findViewById(R.id.et_name)
         val tvDate: TextView = findViewById(R.id.tv_date)
@@ -58,6 +60,13 @@ class EditDate : AppCompatActivity() {
         },
             year, month - 1, date)
 
+        val rgUnit: RadioGroup = findViewById(R.id.rg_unit)
+        when (unit) {
+            1 -> rgUnit.check(R.id.rb_months)
+            2 -> rgUnit.check(R.id.rb_years)
+            else -> rgUnit.check(R.id.rb_days)
+        }
+
         tvSetDate.setOnClickListener {
             datePickerDialog.show()
         }
@@ -78,10 +87,15 @@ class EditDate : AppCompatActivity() {
         }
         tvMake.setOnClickListener {
             name = etSetName.text.toString()
+            unit = when (rgUnit.checkedRadioButtonId) {
+                R.id.rb_months -> 1
+                R.id.rb_years -> 2
+                else -> 0
+            }
             if (name == "") {
                 Snackbar.make(it, R.string.put_name, Snackbar.LENGTH_LONG).show()
             } else {
-                dateDao.update(DateData(dateId, name, year, month, date, 1))
+                dateDao.update(DateData(dateId, name, year, month, date, unit))
                 setResult(RESULT_EDIT)
                 finish()
             }
