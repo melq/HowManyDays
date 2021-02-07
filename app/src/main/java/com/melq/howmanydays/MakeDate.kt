@@ -3,6 +3,7 @@ package com.melq.howmanydays
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.widget.EditText
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.room.Room
@@ -28,6 +29,7 @@ class MakeDate : AppCompatActivity() {
         var year: Int = today.year
         var month: Int = today.monthValue
         var date: Int = today.dayOfMonth
+        var unit: Int = 0
 
         val etSetName: EditText = findViewById(R.id.et_name)
         val tvDate: TextView = findViewById(R.id.tv_date)
@@ -47,6 +49,9 @@ class MakeDate : AppCompatActivity() {
         },
             year, month - 1, date)
 
+        val rgUnit: RadioGroup = findViewById(R.id.rg_unit)
+        rgUnit.check(R.id.rb_days)
+
         tvSetDate.setOnClickListener {
             datePickerDialog.show()
         }
@@ -56,10 +61,15 @@ class MakeDate : AppCompatActivity() {
         }
         tvMake.setOnClickListener {
             name = etSetName.text.toString()
+            unit = when (rgUnit.checkedRadioButtonId) {
+            R.id.rb_months -> 1
+            R.id.rb_years -> 2
+            else -> 0
+        }
             if (name == "") {
                 Snackbar.make(it, R.string.put_name, Snackbar.LENGTH_LONG).show()
             } else {
-                dateDao.insert(DateData(name, year, month, date))
+                dateDao.insert(DateData(name, year, month, date, unit))
                 setResult(RESULT_MAKE)
                 finish()
             }

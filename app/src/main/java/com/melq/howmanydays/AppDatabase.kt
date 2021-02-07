@@ -18,6 +18,7 @@ data class DateData (
     val displayMode: Int,
 ) {
     constructor(name: String, year: Int, month: Int, date: Int): this(0, name, year, month, date, 0)
+    constructor(name: String, year: Int, month: Int, date: Int, displayMode: Int): this(0, name, year, month, date, displayMode)
 }
 
 @Dao
