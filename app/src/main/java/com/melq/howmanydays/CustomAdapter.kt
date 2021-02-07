@@ -29,7 +29,14 @@ class CustomAdapter(private val dateList: ArrayList<DateData>): RecyclerView.Ada
         val dateData = dateList[position]
 
         val count = try {
-            ChronoUnit.DAYS.between(LocalDate.of(dateData.year, dateData.month, dateData.date), LocalDate.now()).toString()
+            when (dateData.displayMode) {
+                0 -> // 日数表示
+                    ChronoUnit.DAYS.between(LocalDate.of(dateData.year, dateData.month, dateData.date), LocalDate.now()).toString()
+                1 -> // 月数
+                    ChronoUnit.MONTHS.between(LocalDate.of(dateData.year, dateData.month, dateData.date), LocalDate.now()).toString()
+                else -> // 年数
+                    ChronoUnit.YEARS.between(LocalDate.of(dateData.year, dateData.month, dateData.date), LocalDate.now()).toString()
+            }
         } catch (e: DateTimeException) {
             Log.e("MELQ", "got exception", e)
             "N/A"

@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
@@ -55,7 +57,10 @@ class MainActivity : AppCompatActivity() {
         dialog = AlertDialog.Builder(this)
 
         /*データベースの設定*/
-        database = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-name").allowMainThreadQueries().build()
+        database = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-name")
+            .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
+            .build()
         dateDao = database.dateDao()
         dateDao.updateList(dateList)
 

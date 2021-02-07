@@ -3,7 +3,7 @@ package com.melq.howmanydays
 import androidx.room.*
 import java.lang.reflect.Constructor
 
-@Database(entities = [DateData::class], version = 1)
+@Database(entities = [DateData::class], version = 2)
 abstract class AppDatabase: RoomDatabase() {
     abstract fun dateDao(): DateDao
 }
@@ -15,8 +15,9 @@ data class DateData (
     val year:   Int,
     val month:  Int,
     val date:   Int,
+    val displayMode: Int,
 ) {
-    constructor(name: String, year: Int, month: Int, date: Int): this(0, name, year, month, date)
+    constructor(name: String, year: Int, month: Int, date: Int): this(0, name, year, month, date, 0)
 }
 
 @Dao
