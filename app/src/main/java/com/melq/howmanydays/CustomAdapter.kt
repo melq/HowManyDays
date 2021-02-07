@@ -1,5 +1,7 @@
 package com.melq.howmanydays
 
+import android.content.Context
+import android.content.res.Resources
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,6 +19,7 @@ class CustomAdapter(private val dateList: ArrayList<DateData>): RecyclerView.Ada
         val box: View = view.findViewById(R.id.layout_date_box)
         val name: TextView = view.findViewById(R.id.date_name)
         val count: TextView = view.findViewById(R.id.date_count)
+        val countUnit: TextView = view.findViewById(R.id.unit_count)
         val date: TextView = view.findViewById(R.id.date_date)
     }
 
@@ -48,6 +51,11 @@ class CustomAdapter(private val dateList: ArrayList<DateData>): RecyclerView.Ada
         holder.name.text = dateData.name
         holder.count.text = count
         holder.date.text = date
+        holder.countUnit.text = when (dateData.displayMode) {
+            0 -> "日"
+            1 -> "ヶ月"
+            else -> "年"
+        }
 
         holder.box.setOnClickListener {
             listener.onItemClick(it, position, dateData.id)

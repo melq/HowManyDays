@@ -3,6 +3,8 @@
     <string name="action_settings">Settings</string>
     <!-- Strings used for fragments for navigation -->
     <string name="days">日</string>
+    <string name="months">ヶ月</string>
+    <string name="years">年</string>
     <string name="add_date">日付の追加</string>
     <string name="date_name">日付のタイトル</string>
     <string name="hint_input_name">この日に付ける名前を入力</string>

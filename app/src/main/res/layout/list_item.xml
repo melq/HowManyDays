@@ -37,12 +37,12 @@
                 android:textSize="52sp"/>
 
             <TextView
+                android:id="@+id/unit_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:textColor="@color/white"
-                android:textSize="22sp"
-                android:text="@string/days" />
+                android:textSize="22sp" />
 
         </LinearLayout>
 

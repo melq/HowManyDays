@@ -80,7 +80,7 @@ class EditDate : AppCompatActivity() {
             if (name == "") {
                 Snackbar.make(it, R.string.put_name, Snackbar.LENGTH_LONG).show()
             } else {
-                dateDao.update(DateData(dateId, name, year, month, date, 2))
+                dateDao.update(DateData(dateId, name, year, month, date, 1))
                 setResult(RESULT_EDIT)
                 finish()
             }
