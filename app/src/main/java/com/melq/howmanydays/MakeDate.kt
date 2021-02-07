@@ -60,7 +60,7 @@ class MakeDate : AppCompatActivity() {
                 Snackbar.make(it, R.string.put_name, Snackbar.LENGTH_LONG).show()
             } else {
                 dateDao.insert(DateData(name, year, month, date))
-                setResult(resultMake)
+                setResult(RESULT_MAKE)
                 finish()
             }
         }

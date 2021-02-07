@@ -12,10 +12,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import kotlinx.coroutines.Job
 
-const val resultMake = 1
-const val resultEdit = 2
+
+/*遷移先から受け取るデータの識別用定数*/
+const val RESULT_MAKE = 1
+const val RESULT_EDIT = 2
+const val REQUEST_MAKE = 1
+const val REQUEST_EDIT = 2
 
 class MainActivity : AppCompatActivity() {
 //    private val job = Job()
@@ -25,8 +28,6 @@ class MainActivity : AppCompatActivity() {
         lateinit var dialog: AlertDialog.Builder
     }
 
-    private val requestCodeMakeDate = 1
-    private val requestCodeEditDate = 2
     private var dateList = ArrayList<DateData>()
     private val adapter = CustomAdapter(dateList)
 
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
-            resultMake, resultEdit -> {
+            RESULT_MAKE, RESULT_EDIT -> {
                 updateDateList()
             }
         }
@@ -62,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         val fabAdd: FloatingActionButton = findViewById(R.id.fab_add)
         fabAdd.setOnClickListener {
             val intent = Intent(this, MakeDate::class.java)
-            startActivityForResult(intent, requestCodeMakeDate)
+            startActivityForResult(intent, REQUEST_MAKE)
         }
 
         /*RecyclerViewの設定*/
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             override fun onItemClick(view: View, position: Int, clickedId: Int) {
                 val intent = Intent(applicationContext, EditDate::class.java)
                 intent.putExtra("com.melq.howmanydays.mainactivity.id", clickedId)
-                startActivityForResult(intent, requestCodeEditDate)
+                startActivityForResult(intent, REQUEST_EDIT)
             }
         })
     }

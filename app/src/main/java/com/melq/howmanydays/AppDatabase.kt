@@ -39,7 +39,7 @@ interface DateDao {
     @Query("select * from dates where id = :id")
     fun getDate(id: Int): DateData
 
-    fun updateList(dateList: ArrayList<DateData>) {
+    fun updateList(dateList: ArrayList<DateData>) { // もっとキレイに更新できる？？
         val gotList = getAll()
         dateList.clear()
         for (dateData in gotList) {
