@@ -8,9 +8,10 @@
     <string name="add_date">日付の追加</string>
     <string name="date_name">日付のタイトル</string>
     <string name="hint_input_name">この日に付ける名前を入力</string>
-    <string name="date">計測開始日</string>
+    <string name="start_date">計測開始日</string>
     <string name="empty_date">-/-/-</string>
     <string name="set_date">日付を指定</string>
+    <string name="unit_style">表示形式</string>
     <string name="cancel">キャンセル</string>
     <string name="make">作成</string>
     <string name="delete_date">日付の全削除</string>

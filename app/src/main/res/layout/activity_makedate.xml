@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/date"
+            android:text="@string/start_date"
             android:textColor="@color/white" />
 
         <LinearLayout
@@ -70,6 +70,42 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/ripple_dark_gray"
                 android:text="@string/set_date"/>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/unit_style"
+            android:textColor="@color/white" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp">
+
+            <RadioGroup
+                android:id="@+id/rg_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_days"
+                    style="@style/radioButton_unit"
+                    android:text="@string/days"/>
+
+                <RadioButton
+                    android:id="@+id/rb_months"
+                    style="@style/radioButton_unit"
+                    android:text="@string/months"/>
+
+                <RadioButton
+                    android:id="@+id/rb_years"
+                    style="@style/radioButton_unit"
+                    android:text="@string/years"/>
+            </RadioGroup>
         </LinearLayout>
 
         <LinearLayout

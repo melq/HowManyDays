@@ -27,10 +27,9 @@
         android:layout_marginHorizontal="16dp">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/date_name"
-            android:textColor="@color/white" />
+            style="@style/input_title"
+            android:layout_marginTop="0dp"
+            android:text="@string/date_name" />
 
         <EditText
             android:id="@+id/et_name"
@@ -43,11 +42,8 @@
             android:textColorHint="@color/very_light_gray" />
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="@string/date"
-            android:textColor="@color/white" />
+            style="@style/input_title"
+            android:text="@string/start_date" />
 
         <LinearLayout
             android:orientation="horizontal"
@@ -71,6 +67,39 @@
                 android:layout_marginEnd="8dp"
                 android:background="@drawable/ripple_dark_gray"
                 android:text="@string/set_date"/>
+        </LinearLayout>
+
+        <TextView
+            style="@style/input_title"
+            android:text="@string/unit_style" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp">
+
+            <RadioGroup
+                android:id="@+id/rg_unit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_days"
+                    style="@style/radioButton_unit"
+                    android:text="@string/days"/>
+
+                <RadioButton
+                    android:id="@+id/rb_months"
+                    style="@style/radioButton_unit"
+                    android:text="@string/months"/>
+
+                <RadioButton
+                    android:id="@+id/rb_years"
+                    style="@style/radioButton_unit"
+                    android:text="@string/years"/>
+            </RadioGroup>
         </LinearLayout>
 
         <LinearLayout
