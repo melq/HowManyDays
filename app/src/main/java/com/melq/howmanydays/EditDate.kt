@@ -48,14 +48,14 @@ class EditDate : AppCompatActivity() {
 
         etSetName.setText(name)
 
-        var dateText = "$year/$month/$date"
+        var dateText = "$year-$month-$date"
         tvDate.text = dateText
 
         val datePickerDialog = DatePickerDialog(this, { _, pYear, pMonth, pDate ->
             year = pYear
             month = pMonth + 1
             date = pDate
-            dateText = "$year/$month/$date"
+            dateText = "$year-$month-$date"
             tvDate.text = dateText
         },
             year, month - 1, date)

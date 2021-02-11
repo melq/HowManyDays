@@ -37,14 +37,14 @@ class MakeDate : AppCompatActivity() {
         val tvCancel: TextView = findViewById(R.id.tv_cancel)
         val tvMake: TextView  = findViewById(R.id.tv_make)
 
-        var dateText = "$year/$month/$date"
+        var dateText = "$year-$month-$date"
         tvDate.text = dateText
 
         val datePickerDialog = DatePickerDialog(this, { _, pYear, pMonth, pDate ->
             year = pYear
             month = pMonth + 1
             date = pDate
-            dateText = "$year/$month/$date"
+            dateText = "$year-$month-$date"
             tvDate.text = dateText
         },
             year, month - 1, date)
