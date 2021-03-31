@@ -54,6 +54,12 @@ class MainActivity : AppCompatActivity() {
             }
             RESULT_EDIT -> {
                 updateDateList()
+                val dateName = data?.getStringExtra("key.editedDateName")
+                dateName?.let {
+                    Snackbar.make(findViewById(R.id.layout_main),
+                        "$it を編集しました",
+                        Snackbar.LENGTH_LONG).show()
+                }
             }
         }
     }

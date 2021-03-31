@@ -2,6 +2,7 @@ package com.melq.howmanydays
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.widget.EditText
 import android.widget.RadioGroup
@@ -96,7 +97,9 @@ class EditDate : AppCompatActivity() {
                 Snackbar.make(it, R.string.put_name, Snackbar.LENGTH_LONG).show()
             } else {
                 dateDao.update(DateData(dateId, name, year, month, date, unit))
-                setResult(RESULT_EDIT)
+                val data = Intent()
+                data.putExtra("key.editedDateName", name)
+                setResult(RESULT_EDIT, data)
                 finish()
             }
         }
