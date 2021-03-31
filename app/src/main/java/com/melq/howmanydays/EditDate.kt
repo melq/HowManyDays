@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.RadioGroup
 import android.widget.TextView
@@ -27,29 +28,30 @@ class EditDate : AppCompatActivity() {
 
         val intent = intent
         val dateId = intent.getIntExtra("com.melq.howmanydays.mainactivity.id", -1)
-        if (dateId == -1)
-            finish()
+        if (dateId == -1) finish()
 
         database = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-name").allowMainThreadQueries().build()
         dateDao = database.dateDao()
         val dateData = dateDao.getDate(dateId)
+
+        var editFlg = false
 
         var name = dateData.name
         var year = dateData.year
         var month = dateData.month
         var date = dateData.date
         var unit = dateData.displayMode
+        var dateText = "$year-$month-$date"
+        val defaultDateText = dateText
 
         val etSetName: EditText = findViewById(R.id.et_name)
         val tvDate: TextView = findViewById(R.id.tv_date)
         val tvSetDate: TextView = findViewById(R.id.tv_set_date)
         val tvCancel: TextView = findViewById(R.id.tv_cancel)
         val tvDelete: TextView = findViewById(R.id.tv_delete)
-        val tvMake: TextView = findViewById(R.id.tv_edit)
+        val tvUpdate: TextView = findViewById(R.id.tv_edit)
 
         etSetName.setText(name)
-
-        var dateText = "$year-$month-$date"
         tvDate.text = dateText
 
         val datePickerDialog = DatePickerDialog(this, { _, pYear, pMonth, pDate ->
@@ -58,6 +60,7 @@ class EditDate : AppCompatActivity() {
             date = pDate
             dateText = "$year-$month-$date"
             tvDate.text = dateText
+            editFlg = defaultDateText != "$year-$month-$date" //変更があったかチェック
         },
             year, month - 1, date)
 
@@ -86,21 +89,30 @@ class EditDate : AppCompatActivity() {
             dialog.setNegativeButton("Cancel") { _, _ -> /*なにもしない*/ }
             dialog.show()
         }
-        tvMake.setOnClickListener {
-            name = etSetName.text.toString()
-            unit = when (rgUnit.checkedRadioButtonId) {
+        tvUpdate.setOnClickListener {
+            val tmpUnit = when (rgUnit.checkedRadioButtonId) {
                 R.id.rb_months -> 1
                 R.id.rb_years -> 2
                 else -> 0
             }
+            if (name != etSetName.text.toString() || unit != tmpUnit) editFlg = true //名前と表示形式の変更をチェック
+
+            name = etSetName.text.toString()
+            unit = tmpUnit
+
+            Log.v("test", editFlg.toString())
+
             if (name == "") {
-                Snackbar.make(it, R.string.put_name, Snackbar.LENGTH_LONG).show()
+//                Snackbar.make(it, R.string.put_name, Snackbar.LENGTH_LONG).show()
             } else {
-                dateDao.update(DateData(dateId, name, year, month, date, unit))
-                val data = Intent()
-                data.putExtra("key.editedDateName", name)
-                setResult(RESULT_EDIT, data)
-                finish()
+                if (!editFlg) Snackbar.make(it, R.string.not_edit, Snackbar.LENGTH_LONG).show()
+                else {
+                    dateDao.update(DateData(dateId, name, year, month, date, unit))
+                    val data = Intent()
+                    data.putExtra("key.editedDateName", name)
+                    setResult(RESULT_EDIT, data)
+                    finish()
+                }
             }
         }
     }
