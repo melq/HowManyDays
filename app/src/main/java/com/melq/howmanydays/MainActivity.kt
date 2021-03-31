@@ -19,6 +19,7 @@ import com.google.android.material.snackbar.Snackbar
 /*遷移先から受け取るデータの識別用定数*/
 const val RESULT_MAKE = 1
 const val RESULT_EDIT = 2
+const val RESULT_DELETE = 3
 const val REQUEST_MAKE = 1
 const val REQUEST_EDIT = 2
 
@@ -58,6 +59,15 @@ class MainActivity : AppCompatActivity() {
                 dateName?.let {
                     Snackbar.make(findViewById(R.id.layout_main),
                         "$it を編集しました",
+                        Snackbar.LENGTH_LONG).show()
+                }
+            }
+            RESULT_DELETE -> {
+                updateDateList()
+                val dateName = data?.getStringExtra("key.deletedDateName")
+                dateName?.let {
+                    Snackbar.make(findViewById(R.id.layout_main),
+                        "$it を削除しました",
                         Snackbar.LENGTH_LONG).show()
                 }
             }

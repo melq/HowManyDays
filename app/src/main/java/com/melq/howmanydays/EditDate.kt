@@ -83,7 +83,9 @@ class EditDate : AppCompatActivity() {
             dialog.setMessage(R.string.ask_delete)
             dialog.setPositiveButton("OK") { _, _ ->
                 dateDao.delete(dateData)
-                setResult(RESULT_EDIT)
+                val data = Intent()
+                data.putExtra("key.deletedDateName", name)
+                setResult(RESULT_DELETE, data)
                 finish()
             }
             dialog.setNegativeButton("Cancel") { _, _ -> /*なにもしない*/ }
