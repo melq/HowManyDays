@@ -3,6 +3,7 @@ package com.melq.howmanydays
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 
 
 /*遷移先から受け取るデータの識別用定数*/
@@ -41,7 +43,16 @@ class MainActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (resultCode) {
-            RESULT_MAKE, RESULT_EDIT -> {
+            RESULT_MAKE -> {
+                updateDateList()
+                val dateName = data?.getStringExtra("key.madeDateName")
+                dateName?.let {
+                    Snackbar.make(findViewById(R.id.layout_main), //Viewの取得、これで合ってる？
+                        "$it を作成しました",
+                        Snackbar.LENGTH_LONG).show()
+                }
+            }
+            RESULT_EDIT -> {
                 updateDateList()
             }
         }
