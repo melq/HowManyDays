@@ -103,7 +103,7 @@ class EditDate : AppCompatActivity() {
             Log.v("test", editFlg.toString())
 
             if (name == "") {
-//                Snackbar.make(it, R.string.put_name, Snackbar.LENGTH_LONG).show()
+                Snackbar.make(it, R.string.put_name, Snackbar.LENGTH_LONG).show()
             } else {
                 if (!editFlg) Snackbar.make(it, R.string.not_edit, Snackbar.LENGTH_LONG).show()
                 else {
